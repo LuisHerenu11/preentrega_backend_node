@@ -43,4 +43,16 @@ export const createProduct = async (title, price, category) => {
     }
 };
 
-// export const deleteProduct = async (id) => { ... }
+export const deleteProduct = async (id) => {
+    try {
+        const response = await fetch(`${API_URL}/${id}`, {
+            method: 'DELETE'
+        });
+        
+        const data = await response.json();
+        console.log(`PRODUCTO ${id} ELIMINADO`);
+        console.log(data); 
+    } catch (error) {
+        console.error(`Fallo al eliminar el producto ${id}:`, error.message);
+    }
+};
