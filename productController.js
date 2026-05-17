@@ -23,5 +23,24 @@ export const getProductById = async (id) => {
     }
 };
 
-// export const createProduct = async (productData) => { ... }
+export const createProduct = async (title, price, category) => {
+    try {
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            // como FakeStore necesita datos en formato JSON, parseamos los datos a JSON
+            body: JSON.stringify({
+                title: title,
+                price: Number(price),
+                category: category
+            })
+        });
+        
+        const data = await response.json();
+        console.log("PRODUCTO CREADO CON ÉXITO");
+        console.log(data);
+    } catch (error) {
+        console.error("Fallo al crear el producto:", error.message);
+    }
+};
+
 // export const deleteProduct = async (id) => { ... }

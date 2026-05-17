@@ -1,5 +1,5 @@
 // importaciones
-import { getAllProducts, getProductById } from './productController.js';
+import { getAllProducts, getProductById, createProduct } from './productController.js';
 
 // extracción de datos
 const [, , action, target, ...data] = process.argv;
@@ -18,12 +18,10 @@ switch (action?.toUpperCase()) {
         break;
 
     case 'POST':
-        // para crear un producto nuevo
         if (target === 'products') {
-            // uso de destructuring con el array data
             const [title, price, category] = data; 
-            console.log(`En ejecución: Crear producto "${title}" a $${price} en la categoría "${category}"`);
-            // acá irá el fetch POST
+            console.log(`-> En ejecución: Crear producto "${title}" a $${price} en la categoría "${category}"`);
+            await createProduct(title, price, category); // llamada a la FakeStore api
         }
         break;
 
